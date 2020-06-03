@@ -9,7 +9,21 @@ public class CustomerService {
 
 	public Customer getCustomer(int id) {
 		// TODO Auto-generated method stub
-		return new Customer(id,"test");
+		return new Customer(id, "test");
+	}
+
+	public Customer createCustomer(Customer customer) {
+
+		return new Customer((int) Math.random(), customer.getName());
+	}
+
+	public Customer updateCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		return customer;
+	}
+
+	public void deleteCustomerById(int id) {
+
 	}
 
 }
