@@ -1,8 +1,15 @@
 package com.example.udmeyassigment.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,12 +35,12 @@ public class CustomerController {
 	}
 
 	@PostMapping
-	public Customer createCustomer(@RequestBody Customer customer) {
+	public Customer createCustomer(@Valid @RequestBody Customer customer) {
 		return customerService.createCustomer(customer);
 	}
 
 	@PutMapping
-	public Customer updateCustomer(@RequestBody Customer customer) {
+	public Customer updateCustomer(@Valid @RequestBody Customer customer) {
 		return customerService.updateCustomer(customer);
 	}
 
@@ -41,6 +48,14 @@ public class CustomerController {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void deleteCustomerById(@PathVariable("cId") int id) {
 		customerService.deleteCustomerById(id);
+	}
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	public List<String> handleValidationException(ConstraintViolationException e) {
+
+		return e.getConstraintViolations().stream().map(err -> err.getPropertyPath() + "|" + err.getMessage())
+				.collect(Collectors.toList());
+
 	}
 
 }

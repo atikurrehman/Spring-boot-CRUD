@@ -14,7 +14,7 @@ public class CustomerService {
 
 	public Customer createCustomer(Customer customer) {
 
-		return new Customer((int) (Math.random()*10), customer.getName());
+		return customer;
 	}
 
 	public Customer updateCustomer(Customer customer) {
