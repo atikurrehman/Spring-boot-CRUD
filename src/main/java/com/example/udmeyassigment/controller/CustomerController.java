@@ -1,15 +1,10 @@
 package com.example.udmeyassigment.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,12 +45,6 @@ public class CustomerController {
 		customerService.deleteCustomerById(id);
 	}
 
-	@ExceptionHandler(ConstraintViolationException.class)
-	public List<String> handleValidationException(ConstraintViolationException e) {
-
-		return e.getConstraintViolations().stream().map(err -> err.getPropertyPath() + "|" + err.getMessage())
-				.collect(Collectors.toList());
-
-	}
+	
 
 }
