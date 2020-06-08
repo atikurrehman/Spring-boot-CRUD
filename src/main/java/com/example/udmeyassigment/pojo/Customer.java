@@ -1,8 +1,9 @@
 package com.example.udmeyassigment.pojo;
 
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Entity
 public class Customer {
-	private int id;
-	@NotBlank
-	@Size(min = 3, max = 100)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	private String name;
 
 }

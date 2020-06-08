@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.udmeyassigment.pojo.Customer;
+import com.example.udmeyassigment.DTO.CustomerDTO;
 import com.example.udmeyassigment.service.CustomerService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j // will provide loggin
 @RestController
 @RequestMapping("customers/")
 public class CustomerController {
@@ -25,17 +28,18 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@GetMapping("/{cId}")
-	public Customer getCustomerById(@PathVariable("cId") int id) {
+	public CustomerDTO getCustomerById(@PathVariable("cId") int id) {
+		log.debug("in getCustomerById +" + id);
 		return customerService.getCustomer(id);
 	}
 
 	@PostMapping
-	public Customer createCustomer(@Valid @RequestBody Customer customer) {
+	public CustomerDTO createCustomer(@Valid @RequestBody CustomerDTO customer) {
 		return customerService.createCustomer(customer);
 	}
 
 	@PutMapping
-	public Customer updateCustomer(@Valid @RequestBody Customer customer) {
+	public CustomerDTO updateCustomer(@Valid @RequestBody CustomerDTO customer) {
 		return customerService.updateCustomer(customer);
 	}
 
@@ -44,7 +48,5 @@ public class CustomerController {
 	public void deleteCustomerById(@PathVariable("cId") int id) {
 		customerService.deleteCustomerById(id);
 	}
-
-	
 
 }
