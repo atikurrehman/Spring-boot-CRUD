@@ -2,7 +2,6 @@ package com.example.udmeyassigment.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.udmeyassigment.pojo.Customer;
 import com.example.udmeyassigment.service.CustomerService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("customers/")
 public class CustomerController {
 
-	@Autowired
-	private CustomerService customerService;
+	private final CustomerService customerService;
 
 	@GetMapping("/{cId}")
 	public Customer getCustomerById(@PathVariable("cId") int id) {
@@ -44,7 +45,5 @@ public class CustomerController {
 	public void deleteCustomerById(@PathVariable("cId") int id) {
 		customerService.deleteCustomerById(id);
 	}
-
-	
 
 }
