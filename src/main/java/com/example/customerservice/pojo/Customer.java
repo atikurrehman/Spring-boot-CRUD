@@ -1,4 +1,4 @@
-package com.example.udmeyassigment.pojo;
+package com.example.customerservice.pojo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,6 @@
-package com.example.udmeyassigment.controller;
+package com.example.customerservice.controller;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -13,21 +15,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.udmeyassigment.pojo.Customer;
-import com.example.udmeyassigment.service.CustomerService;
+import com.example.customerservice.pojo.Customer;
+import com.example.customerservice.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("customers/")
+@RequestMapping("customers")
 public class CustomerController {
 
 	private final CustomerService customerService;
 
 	@GetMapping("/{cId}")
 	public Customer getCustomerById(@PathVariable("cId") int id) {
-		return customerService.getCustomer(id);
+		return customerService.getCustomerById(id);
+	}
+
+	@GetMapping
+	public List<Customer> getCustomerById() {
+		return customerService.getCustomers();
 	}
 
 	@PostMapping

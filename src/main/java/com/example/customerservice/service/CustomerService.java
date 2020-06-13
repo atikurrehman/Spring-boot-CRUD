@@ -1,9 +1,11 @@
-package com.example.udmeyassigment.service;
+package com.example.customerservice.service;
+
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.udmeyassigment.pojo.Customer;
-import com.example.udmeyassigment.repository.CustomerRepository;
+import com.example.customerservice.pojo.Customer;
+import com.example.customerservice.repository.CustomerRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +15,7 @@ public class CustomerService {
 
 	private final CustomerRepository customerRepository;
 
-	public Customer getCustomer(long id) {
+	public Customer getCustomerById(long id) {
 
 		return this.customerRepository.findById(id).orElseThrow();
 	}
@@ -31,6 +33,11 @@ public class CustomerService {
 
 	public void deleteCustomerById(long id) {
 		this.customerRepository.deleteById(id);
+	}
+
+	public List<Customer> getCustomers() {
+		// TODO Auto-generated method stub
+		return this.customerRepository.findAll();
 	}
 
 }
